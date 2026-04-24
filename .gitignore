@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated instances (can be regenerated)
+# Uncomment the following lines if you don't want to track generated files:
+# instances/HK-*/
+# instances/instance_registry.csv
+# instances/corridor_summary.csv

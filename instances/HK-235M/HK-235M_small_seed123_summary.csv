@@ -1,0 +1,17 @@
+type,id,position_km,locker_capacity,service_time,service_energy,demand_weight,release_time,feasible_lockers
+station,1,0.0,5.0,1.5,12.0,,,
+station,2,0.179,5.0,1.5,12.0,,,
+station,3,0.317,5.0,1.5,12.0,,,
+station,4,0.639,5.0,1.5,12.0,,,
+station,5,0.831,5.0,1.5,12.0,,,
+station,6,1.249,5.0,1.5,12.0,,,
+station,7,1.947,5.0,1.5,12.0,,,
+station,8,2.217,5.0,1.5,12.0,,,
+station,9,2.949,5.0,1.5,12.0,,,
+station,10,3.007,5.0,1.5,12.0,,,
+order,1,,,,,0.39,4.71,2;6
+order,2,,,,,0.58,48.92,4;8;10
+order,3,,,,,1.85,30.96,4;7;9
+order,4,,,,,1.82,34.89,6;9
+order,5,,,,,1.85,35.54,4;6
+order,6,,,,,1.82,53.87,5;8

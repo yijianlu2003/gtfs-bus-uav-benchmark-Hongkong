@@ -1,0 +1,21 @@
+parameter_symbol,model_meaning,real_world_proxy,value_or_rule,unit,source_type,source_title,source_url,note
+q_k,订单 k 的重量,走廊内电商/邮件轻小件订单重量,"0.3-1.9 kg，U(0.3,1.9) 采样",kg,校准假设,Hongkong Post packet collection rules,https://www.hongkongpost.hk/en/receiving_mail/cdn/index.html,采用不超过 2 kg 的轻小件，与 iPostal 站点场景对齐
+r_k,订单 k 的释放时刻,AM 峰值 90 分钟窗口内的订单到达时刻,"0-54 min（按 corridor 的 T_max 比例缩放）",min,场景设定,AM peak dispatch wave,-,按各走廊的 T_max 等比缩放
+L_j,站点 j 的 locker 容量,90 分钟窗口内可供本系统占用的柜机重量当量,"small: 5-7, medium: 6-8, large: 7-9",kg-equivalent,派生假设,Hongkong Post iPostal size limit,https://www.hongkongpost.hk/en/receiving_mail/cdn/index.html,由官方尺寸上限和轻小件假设转为可服务重量预算
+Q_u,无人机 u 的最大载重,DJI FlyCart 30 双电载货模式代表载重,30,kg,官方参数,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,采用双电配置下的代表性安全载重
+E_u,无人机 u 的最大电池能量,双电池总能量,3968.8,Wh,官方参数,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,由 2 块 DJI DB2000 电池构成：2 × 1984.4 Wh
+sigma_j,站点 j 的投递服务时间,柜机开仓、放件、确认关闭的作业时间,1.5,min,场景设定,Operational assumption,-,用于保持各算法在同一作业节拍下可比
+tau_ij^h,由 hub h 出发沿弧 (i,j) 的飞行时间,FlyCart 30 巡航速度对应的距离/速度,"corridor_distance(i,j) / 54 × 60",min,官方参数派生,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,采用 15 m/s (=54 km/h) 代表巡航速度
+alpha_ij^h,沿弧 (i,j) 的固定飞行能耗,空载单位里程能耗,"141.743 × corridor_distance(i,j)",Wh,官方参数派生,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,由双电空载航程 28 km 与总电量 3968.8 Wh 推得
+beta_ij^h,沿弧 (i,j) 的单位载重能耗系数,满载与空载单位里程能耗差,"3.544 × corridor_distance(i,j)",Wh/kg,官方参数派生,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,由双电 30 kg 满载航程 16 km 与空载航程 28 km 的差异推得
+bar_tau_jh,站点 j 独立飞回 hub h 的飞行时间,站点到枢纽的返航时间,"corridor_distance(j, hub_h) / 54 × 60",min,官方参数派生,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,与 outbound 使用同一巡航速度口径
+bar_e_jh,站点 j 独立飞回 hub h 的飞行能耗,空载返航能耗,"141.743 × corridor_distance(j, hub_h)",Wh,官方参数派生,DJI FlyCart 30 Specs,https://www.dji.com/global/flycart-30/specs,返航默认不携货，使用固定空载里程能耗
+gamma_j,站点 j 投递动作的固定作业能耗,悬停+开仓+姿态控制的附加能耗,12.0,Wh,场景设定,Operational assumption,-,单站服务的固定附加能耗
+theta_h,无人机在 hub h 的周转时间,着陆、换电/装载、再次起飞准备时间,3.0,min,场景设定,Operational assumption,-,保证多 sortie 连续性约束可以直接落地
+T^max,规划时域上界,各走廊 AM 峰值滚动实验窗口,"corridor-specific (see corridor_data/*.csv)",min,GTFS 数据锚定,HK GTFS frequencies.txt,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip,取 AM 峰值首班到末班间隔 + buffer
+H,走廊公交班距,AM 峰值代表班距,"corridor-specific (see below)",min,GTFS 数据锚定,HK GTFS frequencies.txt,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip,从 frequencies.txt 中提取 07:00-09:30 时段 headway_secs
+M,Big-M 常数,时域线性化上界,"T^max + 60",min,建模常数,MILP linearisation bound,-,设置为 T_max + 60 以覆盖回运与周转
+lambda_1,顾客等待权重,等待时间成本权重,1.00,cost/min,实验权重,Scenario design,-,各算法共享同一目标函数权重
+lambda_2,能耗权重,电量消耗成本权重,0.01,cost/Wh,实验权重,Scenario design,-,用于把 Wh 量级折算到与时间项可比较的目标值尺度
+lambda_3,飞行/作业时间权重,飞行运营时间成本权重,0.25,cost/min,实验权重,Scenario design,-,各算法共享同一目标函数权重
+lambda_4,公交接驳等待权重,等待公交回运的空闲时间成本,0.80,cost/min,实验权重,Scenario design,-,使公交接驳等待在目标函数中高于一般飞行作业时间

@@ -1,0 +1,5 @@
+corridor_id,route_name,agency,direction,n_stops,corridor_length_km,am_peak_headway_min,planning_horizon_min,gtfs_source
+HK-14D,KMB 14D,KMB,Yau Tong -> Choi Hung,6,6.79,5.0,90.0,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip
+HK-235M,KMB 235M,KMB,On Yam Estate -> Kwai Fong Station,10,3.007,8.0,90.0,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip
+HK-31M,KMB 31M,KMB,Shek Lei -> Kwai Fong Station,10,3.132,10.0,90.0,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip
+HK-42M,KMB 42M,KMB,Tsuen Wan Discovery Park -> Tsing Yi Cheung Wang,9,4.934,7.0,90.0,https://static.data.gov.hk/td/pt-headway-en/gtfs.zip
