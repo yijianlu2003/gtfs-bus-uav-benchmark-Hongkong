@@ -168,7 +168,7 @@ If you use this benchmark in your research, please cite:
 ```bibtex
 @misc{busuav_gtfs_benchmark_2026,
   title     = {BusUAV-GTFS-Benchmark: A GTFS-derived Benchmark for Bus-UAV Collaborative Delivery},
-  author    = {[Your Name]},
+  author    = {[Yijian Lu]},
   year      = {2026},
   url       = {https://github.com/YOUR_USERNAME/BusUAV-GTFS-Benchmark}
 }
